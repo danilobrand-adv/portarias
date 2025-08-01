@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Busca de Portarias</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            background-color: #f0f2f5; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container { 
+            max-width: 90%; 
+            width: 100%;
+            margin: 20px auto; 
+            padding: 20px;
+            background: #ffffff; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            max-width: 250px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        h1 { 
+            text-align: center; 
+            color: #0f4c81; 
+            font-size: 2em;
+            margin: 0;
+        }
+        /* Estilos do Slider */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-height: 250px; /* Altura máxima para os banners */
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            min-width: 100%;
+        }
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        .slider-nav button {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.5em;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slider-nav button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        /* Estilos do Formulário e Botões */
+        form { 
+            background: #f4f4f4; 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin-bottom: 20px; 
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        input[type="text"], input[type="password"] { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            font-size: 1em;
+        }
+        button { 
+            background-color: #0f4c81; 
+            color: white; 
+            padding: 12px 20px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            width: 100%; 
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        button:hover { 
+            background-color: #0b3d68; 
+        }
+        .exame-btn-container {
+            margin-top: 10px;
+        }
+        .exame-btn {
+            background-color: #f7a400;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+        .exame-btn:hover {
+            background-color: #d18b00;
+        }
+        /* Estilos da Tabela */
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 20px; 
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        th, td { 
+            border: 1px solid #e0e0e0; 
+            padding: 12px; 
+            text-align: left; 
+        }
+        th { 
+            background-color: #0f4c81; 
+            color: white; 
+            font-weight: bold;
+        }
+        tr:nth-child(even) { 
+            background-color: #f9f9f9; 
+        }
+        .acessar-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .acessar-btn:hover { 
+            background-color: #218838; 
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            th, td {
+                padding: 8px;
+                font-size: 0.9em;
+            }
+            .header img {
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Formulário de Login -->
+<div id="login-container" class="container">
+    <div class="header">
+        <img src="https://i2.wp.com/goiana.pe.gov.br/wp-content/uploads/2025/07/LOGO-TOPO-SITE-PREFEITURA-GOIANA.png" alt="Logo da Prefeitura de Goiana">
+        <h1>Acesso ao Sistema</h1>
+    </div>
+    <form id="loginForm">
+        <label for="username">Usuário:</label>
+        <input type="text" id="username" name="username" placeholder="Digite seu usuário" required>
+        
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+        
+        <button type="submit">Entrar</button>
+    </form>
+    <div id="login-message" style="text-align: center; color: red; margin-top: 10px;"></div>
+</div>
+
+<!-- Conteúdo principal da aplicação, inicialmente escondido -->
+<div id="app-content" class="container" style="display:none;">
+    <div class="header">
+        <img src="https://i2.wp.com/goiana.pe.gov.br/wp-content/uploads/2025/07/LOGO-TOPO-SITE-PREFEITURA-GOIANA.png" alt="Logo da Prefeitura de Goiana">
+        <h1>Busca de Portarias</h1>
+    </div>
+
+    <!-- Slider de banners -->
+    <div class="slider-container">
+        <div class="slides">
+            <div class="slide">
+                <a href="#" target="_blank">
+                    <img src="https://placehold.co/1899x404/0056b3/ffffff?text=Bem+vindo+a+Prefeitura+de+Goiana" alt="Banner de Boas Vindas">
+                </a>
+            </div>
+            <div class="slide">
+                <a href="https://wlabpe.com.br/examepronto/index.php?class=ConsultaExameForm&method=onShow&c=goiana" target="_blank">
+                    <img src="https://i1.wp.com/goiana.pe.gov.br/wp-content/uploads/2025/07/BANNER-RESULTADO-EXAMES-SLIDE-SITE.png" alt="Banner de Consulta de Exames">
+                </a>
+            </div>
+            <!-- Novos banners adicionados -->
+            <div class="slide">
+                <a href="https://goiana.pe.gov.br/defesa-civil-3/" target="_blank">
+                    <img src="https://i1.wp.com/goiana.pe.gov.br/wp-content/uploads/2025/07/BANNER-DEFESA-CIVIL-SLIDE-SITE.png" alt="Banner da Defesa Civil">
+                </a>
+            </div>
+            <div class="slide">
+                <a href="https://goiana.pe.gov.br/wp-content/uploads/2025/07/BANNER-OUVIDORIA-1.pdf" target="_blank">
+                    <img src="https://i0.wp.com/goiana.pe.gov.br/wp-content/uploads/2025/07/SLIDE-OUVIDORIA-SITE-2-1.png" alt="Banner da Ouvidoria">
+                </a>
+            </div>
+            <div class="slide">
+                <a href="https://goiana.pe.gov.br/formulario-de-inscricao-do-conselho-e-regimento-alteracao-da-lei/" target="_blank">
+                    <img src="https://placehold.co/1899x404/28a745/ffffff?text=Formul%C3%A1rio+de+Inscri%C3%A7%C3%A3o+do+Conselho" alt="Banner de Formulário de Inscrição">
+                </a>
+            </div>
+        </div>
+        <div class="slider-nav">
+            <button class="prev-btn">&#10094;</button>
+            <button class="next-btn">&#10095;</button>
+        </div>
+    </div>
+    
+    <form id="searchForm">
+        <label for="numero">Número da Portaria:</label>
+        <input type="text" id="numero" name="numero" placeholder="Ex: 1496">
+        
+        <label for="ano">Ano:</label>
+        <input type="text" id="ano" name="ano" placeholder="Ex: 2025">
+
+        <label for="descricao">Descrição (palavra-chave):</label>
+        <input type="text" id="descricao" name="descricao" placeholder="Ex: educação">
+        
+        <button type="submit">Buscar</button>
+    </form>
+
+    <div id="results"></div>
+</div>
+
+<script>
+    // URL do arquivo TSV.
+    const TSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWdETwFdPUWu7eKtBxiVDhltiyEzb5M8p9sbgDjoafwEZGpp9FAABldSRy8JVrpo7EmYxUzQt5ZXgJ/pub?gid=291741157&single=true&output=tsv";
+    
+    // Armazena todos os dados do TSV, sem filtro.
+    let allData = [];
+    // Armazena apenas os dados com usuário e senha para a verificação de login.
+    let loginData = [];
+
+    // Oculta o conteúdo principal até que o login seja bem-sucedido
+    const appContent = document.getElementById('app-content');
+    const loginContainer = document.getElementById('login-container');
+    const loginForm = document.getElementById('loginForm');
+    const loginMessage = document.getElementById('login-message');
+
+    document.getElementById('searchForm').addEventListener('submit', handleFormSubmit);
+    loginForm.addEventListener('submit', handleLogin);
+
+    // Variáveis e lógica do slider
+    const slides = document.querySelector('.slides');
+    const slide = document.querySelectorAll('.slide');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    let currentSlide = 0;
+    const totalSlides = slide.length;
+    let slideInterval; // A variável de intervalo é iniciada somente após o login
+
+    // Função para mostrar o slide
+    function showSlide(index) {
+        slides.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    // Função para o próximo slide
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showSlide(currentSlide);
+    }
+
+    // Função para o slide anterior
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        showSlide(currentSlide);
+    }
+
+    // Carrega os dados do TSV uma vez quando a página carrega
+    document.addEventListener('DOMContentLoaded', () => {
+        loadData();
+    });
+
+    async function loadData() {
+        // Exibe mensagem de carregamento na tela de login
+        loginMessage.innerHTML = "Carregando dados para login...";
+        
+        try {
+            const response = await fetch(TSV_URL);
+            
+            if (!response.ok) {
+                throw new Error('Falha ao buscar o arquivo TSV. Verifique a URL.');
+            }
+            
+            const tsvText = await response.text();
+            const dados = parseTsv(tsvText);
+
+            // Filtra linhas vazias ou de cabeçalho para garantir que apenas dados válidos sejam processados.
+            let dadosFiltrados = dados.filter(linha => linha.some(item => item.trim() !== ''));
+
+            // Mapeamento corrigido das colunas do TSV para o objeto.
+            // Os índices do array são baseados na posição da coluna (A=0, B=1, C=2, D=3, E=4, F=5, G=6).
+            allData = dadosFiltrados.map(linha => ({
+                portaria: linha[1] || '',      // Coluna B
+                ano: linha[2] || '',           // Coluna C
+                descricao: linha[3] || '',     // Coluna D
+                link: linha[4] || '',          // Coluna E
+                usuario: linha[5] || '',       // Coluna F (usuário)
+                senha: linha[6] || ''          // Coluna G (senha)
+            }));
+            
+            // Apenas filtra os dados que contêm usuário e senha para a verificação de login.
+            loginData = allData.filter(item => item.usuario && item.senha);
+            
+            // Log para debug: verifica se o usuário DANILO está na lista de login.
+            console.log("Dados de login carregados:", loginData);
+
+            if (loginData.length === 0) {
+                 loginMessage.innerHTML = `<p style='color:red;'>Nenhum dado de login encontrado no arquivo TSV.</p>`;
+            } else {
+                loginMessage.innerHTML = ""; // Limpa a mensagem após o carregamento bem-sucedido
+            }
+
+        } catch (error) {
+            console.error('Erro:', error);
+            loginMessage.innerHTML = `<p style='color:red;'>Ocorreu um erro ao buscar os dados: ${error.message}</p>`;
+        }
+    }
+
+    // A função `parseTsv` agora lida com o formato TSV (tab-separated values).
+    function parseTsv(text) {
+        const lines = text.split('\n');
+        return lines.map(line => {
+            // Divide a linha por tabulação, o delimitador para o formato TSV.
+            const result = line.split('\t');
+            // Remove aspas extras e espaços em branco dos resultados.
+            return result.map(item => (item || '').replace(/^"|"$/g, '').trim());
+        });
+    }
+
+    function handleLogin(event) {
+        event.preventDefault();
+        
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        
+        console.log(`Tentativa de login com: Usuário=${username}, Senha=${password}`);
+
+        // Procura um usuário que corresponda às credenciais na lista de login.
+        const userFound = loginData.find(user => 
+            user.usuario && user.usuario.trim() === username.trim() && 
+            user.senha && user.senha.trim() === password.trim()
+        );
+        
+        console.log("Usuário encontrado:", userFound);
+
+        if (userFound) {
+            // Se as credenciais estiverem corretas, mostra o conteúdo principal
+            loginContainer.style.display = 'none';
+            appContent.style.display = 'block';
+            
+            // Inicia o slider e seus botões
+            slideInterval = setInterval(nextSlide, 5000);
+            prevBtn.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                prevSlide();
+                slideInterval = setInterval(nextSlide, 5000);
+            });
+            nextBtn.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                nextSlide();
+                slideInterval = setInterval(nextSlide, 5000);
+            });
+
+            // Exibe TODOS os dados por padrão após o login bem-sucedido.
+            displayResults(allData);
+
+        } else {
+            // Se as credenciais estiverem incorretas, exibe uma mensagem de erro
+            loginMessage.innerHTML = "Usuário ou senha incorretos.";
+        }
+    }
+
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        
+        const form = event.target;
+        const formData = {
+            numero: form.numero.value,
+            ano: form.ano.value,
+            descricao: form.descricao.value
+        };
+        
+        // Remove os pontos do valor de busca para uma comparação mais flexível
+        const sanitizedNumero = formData.numero.replace(/\./g, '');
+        
+        // Filtra os dados existentes na lista completa, sem refazer o fetch
+        let resultados = allData.filter(p => {
+            const anoMatch = !formData.ano || p.ano.toString() === formData.ano;
+            
+            // Corrige a lógica de busca para o número da portaria, removendo os pontos
+            const portariaSemPontos = (p.portaria || '').replace(/\./g, '');
+            const numeroMatch = !sanitizedNumero || portariaSemPontos.startsWith(sanitizedNumero);
+            
+            const descricaoMatch = !formData.descricao || (p.descricao && p.descricao.toLowerCase().indexOf(formData.descricao.toLowerCase()) !== -1);
+            
+            return anoMatch && numeroMatch && descricaoMatch;
+        });
+
+        resultados.sort((a, b) => {
+            const aNum = parseFloat((a.portaria || '').replace(/\./g, ''));
+            const bNum = parseFloat((b.portaria || '').replace(/\./g, ''));
+            return bNum - aNum;
+        });
+
+        displayResults(resultados);
+    }
+
+    function displayResults(resultados) {
+        const resultsDiv = document.getElementById('results');
+        if (resultados.length === 0) {
+            resultsDiv.innerHTML = "<p style='text-align:center;'>Nenhum resultado encontrado.</p>";
+            return;
+        }
+
+        let tableHtml = '<table><thead><tr><th>Portaria</th><th>Ano</th><th>Descrição</th><th>Link</th></tr></thead><tbody>';
+        
+        resultados.forEach(item => {
+            tableHtml += '<tr>';
+            tableHtml += `<td>${item.portaria || ''}</td>`;
+            tableHtml += `<td>${item.ano || ''}</td>`;
+            tableHtml += `<td>${item.descricao || ''}</td>`;
+            tableHtml += `<td><a href="${item.link || '#'}" class="acessar-btn" target="_blank">Acessar</a></td>`;
+            tableHtml += '</tr>';
+        });
+
+        tableHtml += '</tbody></table>';
+        resultsDiv.innerHTML = tableHtml;
+    }
+</script>
+
+</body>
+</html>
