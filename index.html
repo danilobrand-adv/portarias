@@ -177,7 +177,6 @@
         .acessar-btn:hover {
             background-color: #218838;
         }
-
         /* Estilos da Paginação */
         .pagination-controls {
             display: flex;
@@ -186,7 +185,6 @@
             gap: 10px;
             margin-bottom: 10px;
         }
-
         .pagination-controls button {
             background-color: #e0e0e0;
             color: #333;
@@ -196,7 +194,6 @@
             cursor: pointer;
             width: auto;
         }
-
         .pagination-controls button:disabled {
             background-color: #f0f0f0;
             cursor: not-allowed;
@@ -206,6 +203,28 @@
             padding: 8px;
         }
 
+        /* NOVOS ESTILOS PARA O LAYOUT DE BUSCA */
+        .search-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .search-column {
+            flex: 1;
+        }
+        /* Nova regra para o campo de palavra-chave ocupar toda a largura */
+        .full-width-column {
+            flex: 1;
+            width: 100%;
+        }
+        
+        /* Ajuste para telas menores: empilha os campos */
+        @media (max-width: 768px) {
+            .search-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
         @media (max-width: 600px) {
             .container {
                 padding: 10px;
@@ -236,10 +255,8 @@
     <form id="loginForm">
         <label for="username">Usuário:</label>
         <input type="text" id="username" name="username" placeholder="Digite seu usuário" required>
-
         <label for="password">Senha:</label>
         <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
-
         <button type="submit">Entrar</button>
     </form>
     <div id="login-message" style="text-align: center; color: red; margin-top: 10px;"></div>
@@ -250,7 +267,6 @@
         <img src="https://i2.wp.com/goiana.pe.gov.br/wp-content/uploads/2025/07/LOGO-TOPO-SITE-PREFEITURA-GOIANA.png" alt="Logo da Prefeitura de Goiana">
         <h1>Busca de Portarias</h1>
     </div>
-
     <div class="slider-container">
         <div class="slides">
             <div class="slide">
@@ -286,23 +302,34 @@
     </div>
 
     <form id="searchForm">
-        <label for="numero">Número da Portaria:</label>
-        <input type="text" id="numero" name="numero" placeholder="Ex: 1496">
+        <div class="search-row">
+            <div class="search-column">
+                <label for="numero">Número:</label>
+                <input type="text" id="numero" name="numero" placeholder="Ex: 1496">
+            </div>
+            <div class="search-column">
+                <label for="ano">Ano:</label>
+                <input type="text" id="ano" name="ano" placeholder="Ex: 2025">
+            </div>
+            <div class="search-column">
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" name="tipo">
+                    <option value="">Todos</option>
+                </select>
+            </div>
+            <div class="search-column">
+                <label for="publicação">Data:</label>
+                <input type="text" id="publicação" name="publicação" placeholder="dd-mm-aaaa">
+            </div>
+        </div>
 
-        <label for="ano">Ano:</label>
-        <input type="text" id="ano" name="ano" placeholder="Ex: 2025">
-
-        <label for="descricao">Descrição (palavra-chave):</label>
-        <input type="text" id="descricao" name="descricao" placeholder="Ex: educação">
-
-        <label for="tipo">Tipo de Portaria:</label>
-        <select id="tipo" name="tipo">
-            <option value="">Todos os tipos</option>
-        </select>
-
-        <label for="publicação">Data de Publicação (dia/mês/ano):</label>
-        <input type="text" id="publicação" name="publicação" placeholder="Ex: 08-07-2025">
-
+        <div class="search-row">
+            <div class="search-column full-width-column">
+                <label for="descricao">Palavra-chave:</label>
+                <input type="text" id="descricao" name="descricao" placeholder="Ex: orçamento, licitação, servidor">
+            </div>
+        </div>
+        
         <button type="submit">Buscar</button>
     </form>
     
@@ -482,7 +509,7 @@
 
         const form = document.getElementById('searchForm');
         const formData = {
-            numero: form.numero.value,
+            numero: form.numero.value, 
             ano: form.ano.value,
             descricao: form.descricao.value,
             tipo: form.tipo.value,
@@ -508,7 +535,7 @@
         filteredResults.sort((a, b) => {
             const aNum = parseFloat((a.portaria || '').replace(/\./g, ''));
             const bNum = parseFloat((b.portaria || '').replace(/\./g, ''));
-            return aNum - bNum;
+            return aNum - bNum; 
         });
         
         currentPage = 1;
@@ -557,9 +584,7 @@
     publicacaoInput.addEventListener('input', (e) => {
         let value = e.target.value;
         
-        // Remove tudo que não for dígito
         let cleanedValue = value.replace(/\D/g, '');
-
         let formattedValue = '';
         if (cleanedValue.length > 0) {
             formattedValue += cleanedValue.substring(0, 2);
@@ -572,10 +597,8 @@
             formattedValue += '-';
             formattedValue += cleanedValue.substring(4, 8);
         }
-        
         e.target.value = formattedValue;
     });
-
 
     // Event Listeners para a paginação
     document.getElementById('searchForm').addEventListener('submit', handleFormSubmit);
