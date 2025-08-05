@@ -5,21 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { 
-            font-family: 'Inter', sans-serif; 
-            margin: 0; 
-            background-color: #f0f2f5; 
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        .container { 
-            max-width: 90%; 
+        .container {
+            max-width: 90%;
             width: 100%;
-            margin: 20px auto; 
+            margin: 20px auto;
             padding: 20px;
-            background: #ffffff; 
-            border-radius: 12px; 
+            background: #ffffff;
+            border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
         }
@@ -32,9 +32,9 @@
             height: auto;
             margin-bottom: 10px;
         }
-        h1 { 
-            text-align: center; 
-            color: #0f4c81; 
+        h1 {
+            text-align: center;
+            color: #0f4c81;
             font-size: 2em;
             margin: 0;
         }
@@ -42,7 +42,7 @@
         .slider-container {
             position: relative;
             width: 100%;
-            max-height: 250px; /* Altura máxima para os banners */
+            max-height: 250px;
             overflow: hidden;
             border-radius: 8px;
             margin-bottom: 20px;
@@ -88,37 +88,37 @@
             background: rgba(0, 0, 0, 0.8);
         }
         /* Estilos do Formulário e Botões */
-        form { 
-            background: #f4f4f4; 
-            padding: 20px; 
-            border-radius: 8px; 
-            margin-bottom: 20px; 
+        form {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
-        input[type="text"], input[type="password"] { 
-            width: 100%; 
-            padding: 10px; 
-            border: 1px solid #ddd; 
-            border-radius: 8px; 
-            box-sizing: border-box; 
+        input[type="text"], input[type="password"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
             font-size: 1em;
         }
-        button { 
-            background-color: #0f4c81; 
-            color: white; 
-            padding: 12px 20px; 
-            border: none; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            width: 100%; 
+        button {
+            background-color: #0f4c81;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
             font-size: 1.1em;
             font-weight: bold;
             transition: background-color 0.3s ease;
         }
-        button:hover { 
-            background-color: #0b3d68; 
+        button:hover {
+            background-color: #0b3d68;
         }
         .exame-btn-container {
             margin-top: 10px;
@@ -142,26 +142,26 @@
             background-color: #d18b00;
         }
         /* Estilos da Tabela */
-        table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            margin-top: 20px; 
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
-        th, td { 
-            border: 1px solid #e0e0e0; 
-            padding: 12px; 
-            text-align: left; 
+        th, td {
+            border: 1px solid #e0e0e0;
+            padding: 12px;
+            text-align: left;
         }
-        th { 
-            background-color: #0f4c81; 
-            color: white; 
+        th {
+            background-color: #0f4c81;
+            color: white;
             font-weight: bold;
         }
-        tr:nth-child(even) { 
-            background-color: #f9f9f9; 
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
         }
         .acessar-btn {
             background-color: #28a745;
@@ -174,9 +174,38 @@
             font-weight: bold;
             transition: background-color 0.3s ease;
         }
-        .acessar-btn:hover { 
-            background-color: #218838; 
+        .acessar-btn:hover {
+            background-color: #218838;
         }
+
+        /* Estilos da Paginação */
+        .pagination-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .pagination-controls button {
+            background-color: #e0e0e0;
+            color: #333;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            cursor: pointer;
+            width: auto;
+        }
+
+        .pagination-controls button:disabled {
+            background-color: #f0f0f0;
+            cursor: not-allowed;
+            color: #999;
+        }
+        .pagination-controls select {
+            padding: 8px;
+        }
+
         @media (max-width: 600px) {
             .container {
                 padding: 10px;
@@ -191,37 +220,37 @@
             .header img {
                 max-width: 200px;
             }
+            .pagination-controls {
+                flex-wrap: wrap;
+            }
         }
     </style>
 </head>
 <body>
 
-<!-- Formulário de Login -->
 <div id="login-container" class="container">
     <div class="header">
         <img src="https://i2.wp.com/goiana.pe.gov.br/wp-content/uploads/2025/07/LOGO-TOPO-SITE-PREFEITURA-GOIANA.png" alt="Logo da Prefeitura de Goiana">
-        <h1>Acesso ao Sistema</h1>
+        <h1>Acesso ao Sistema de Busca</h1>
     </div>
     <form id="loginForm">
         <label for="username">Usuário:</label>
         <input type="text" id="username" name="username" placeholder="Digite seu usuário" required>
-        
+
         <label for="password">Senha:</label>
         <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
-        
+
         <button type="submit">Entrar</button>
     </form>
     <div id="login-message" style="text-align: center; color: red; margin-top: 10px;"></div>
 </div>
 
-<!-- Conteúdo principal da aplicação, inicialmente escondido -->
 <div id="app-content" class="container" style="display:none;">
     <div class="header">
         <img src="https://i2.wp.com/goiana.pe.gov.br/wp-content/uploads/2025/07/LOGO-TOPO-SITE-PREFEITURA-GOIANA.png" alt="Logo da Prefeitura de Goiana">
         <h1>Busca de Portarias</h1>
     </div>
 
-    <!-- Slider de banners -->
     <div class="slider-container">
         <div class="slides">
             <div class="slide">
@@ -234,7 +263,6 @@
                     <img src="https://i1.wp.com/goiana.pe.gov.br/wp-content/uploads/2025/07/BANNER-RESULTADO-EXAMES-SLIDE-SITE.png" alt="Banner de Consulta de Exames">
                 </a>
             </div>
-            <!-- Novos banners adicionados -->
             <div class="slide">
                 <a href="https://goiana.pe.gov.br/defesa-civil-3/" target="_blank">
                     <img src="https://i1.wp.com/goiana.pe.gov.br/wp-content/uploads/2025/07/BANNER-DEFESA-CIVIL-SLIDE-SITE.png" alt="Banner da Defesa Civil">
@@ -256,40 +284,65 @@
             <button class="next-btn">&#10095;</button>
         </div>
     </div>
-    
+
     <form id="searchForm">
         <label for="numero">Número da Portaria:</label>
         <input type="text" id="numero" name="numero" placeholder="Ex: 1496">
-        
+
         <label for="ano">Ano:</label>
         <input type="text" id="ano" name="ano" placeholder="Ex: 2025">
 
         <label for="descricao">Descrição (palavra-chave):</label>
         <input type="text" id="descricao" name="descricao" placeholder="Ex: educação">
-        
+
+        <label for="tipo">Tipo de Portaria:</label>
+        <select id="tipo" name="tipo">
+            <option value="">Todos os tipos</option>
+        </select>
+
+        <label for="publicação">Data de Publicação (dia/mês/ano):</label>
+        <input type="text" id="publicação" name="publicação" placeholder="Ex: 08-07-2025">
+
         <button type="submit">Buscar</button>
     </form>
-
-    <div id="results"></div>
+    
+    <div id="results-container">
+        <p>Resultados encontrados: <span id="results-count">0</span></p>
+        <div class="pagination-controls">
+            <div style="display: flex; gap: 5px; align-items: center;">
+                <label for="itemsPerPage">Itens por página:</label>
+                <select id="itemsPerPage">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            
+            <button id="startIndexPageBtn">Primeira</button>
+            <button id="prevPageBtn">Anterior</button>
+            <span id="pageInfo">Página 1 de 1</span>
+            <button id="nextPageBtn">Próxima</button>
+            <button id="endIndexPageBtn">Última</button>
+        </div>
+        <div id="results"></div>
+    </div>
 </div>
 
 <script>
-    // URL do arquivo TSV.
     const TSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWdETwFdPUWu7eKtBxiVDhltiyEzb5M8p9sbgDjoafwEZGpp9FAABldSRy8JVrpo7EmYxUzQt5ZXgJ/pub?gid=291741157&single=true&output=tsv";
-    
-    // Armazena todos os dados do TSV, sem filtro.
-    let allData = [];
-    // Armazena apenas os dados com usuário e senha para a verificação de login.
-    let loginData = [];
 
-    // Oculta o conteúdo principal até que o login seja bem-sucedido
+    let allData = [];
+    let loginData = [];
+    let filteredResults = [];
+    let currentPage = 1;
+    let itemsPerPage = 10;
+    
     const appContent = document.getElementById('app-content');
     const loginContainer = document.getElementById('login-container');
     const loginForm = document.getElementById('loginForm');
     const loginMessage = document.getElementById('login-message');
-
-    document.getElementById('searchForm').addEventListener('submit', handleFormSubmit);
-    loginForm.addEventListener('submit', handleLogin);
+    const resultsCountSpan = document.getElementById('results-count');
 
     // Variáveis e lógica do slider
     const slides = document.querySelector('.slides');
@@ -298,68 +351,79 @@
     const nextBtn = document.querySelector('.next-btn');
     let currentSlide = 0;
     const totalSlides = slide.length;
-    let slideInterval; // A variável de intervalo é iniciada somente após o login
+    let slideInterval;
+    
+    // Campo de data
+    const publicacaoInput = document.getElementById('publicação');
 
-    // Função para mostrar o slide
+    // Elementos de paginação
+    const itemsPerPageSelect = document.getElementById("itemsPerPage");
+    const startIndexPageBtn = document.getElementById("startIndexPageBtn");
+    const prevPageBtn = document.getElementById("prevPageBtn");
+    const nextPageBtn = document.getElementById("nextPageBtn");
+    const pageInfoSpan = document.getElementById("pageInfo");
+    const endIndexPageBtn = document.getElementById("endIndexPageBtn");
+
     function showSlide(index) {
         slides.style.transform = `translateX(-${index * 100}%)`;
     }
 
-    // Função para o próximo slide
     function nextSlide() {
         currentSlide = (currentSlide + 1) % totalSlides;
         showSlide(currentSlide);
     }
 
-    // Função para o slide anterior
     function prevSlide() {
         currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
         showSlide(currentSlide);
     }
 
-    // Carrega os dados do TSV uma vez quando a página carrega
     document.addEventListener('DOMContentLoaded', () => {
         loadData();
     });
 
     async function loadData() {
-        // Exibe mensagem de carregamento na tela de login
         loginMessage.innerHTML = "Carregando dados para login...";
-        
+
         try {
             const response = await fetch(TSV_URL);
-            
             if (!response.ok) {
                 throw new Error('Falha ao buscar o arquivo TSV. Verifique a URL.');
             }
-            
             const tsvText = await response.text();
             const dados = parseTsv(tsvText);
 
-            // Filtra linhas vazias ou de cabeçalho para garantir que apenas dados válidos sejam processados.
             let dadosFiltrados = dados.filter(linha => linha.some(item => item.trim() !== ''));
 
-            // Mapeamento corrigido das colunas do TSV para o objeto.
-            // Os índices do array são baseados na posição da coluna (A=0, B=1, C=2, D=3, E=4, F=5, G=6).
             allData = dadosFiltrados.map(linha => ({
-                portaria: linha[1] || '',      // Coluna B
-                ano: linha[2] || '',           // Coluna C
-                descricao: linha[3] || '',     // Coluna D
-                link: linha[4] || '',          // Coluna E
-                usuario: linha[5] || '',       // Coluna F (usuário)
-                senha: linha[6] || ''          // Coluna G (senha)
+                portaria: linha[1] || '',
+                ano: linha[2] || '',
+                tipo: linha[3] || '',
+                descricao: linha[4] || '',
+                link: linha[5] || '',
+                publicação: linha[6] || '',
+                usuario: linha[7] || '',
+                senha: linha[8] || ''
             }));
-            
-            // Apenas filtra os dados que contêm usuário e senha para a verificação de login.
+
+            const tiposUnicos = [...new Set(allData.map(item => item.tipo).filter(Boolean))].sort();
+            const selectTipo = document.getElementById('tipo');
+
+            tiposUnicos.forEach(tipo => {
+                const option = document.createElement('option');
+                option.value = tipo;
+                option.textContent = tipo;
+                selectTipo.appendChild(option);
+            });
+
             loginData = allData.filter(item => item.usuario && item.senha);
-            
-            // Log para debug: verifica se o usuário DANILO está na lista de login.
+
             console.log("Dados de login carregados:", loginData);
 
             if (loginData.length === 0) {
-                 loginMessage.innerHTML = `<p style='color:red;'>Nenhum dado de login encontrado no arquivo TSV.</p>`;
+                loginMessage.innerHTML = `<p style='color:red;'>Nenhum dado de login encontrado no arquivo TSV.</p>`;
             } else {
-                loginMessage.innerHTML = ""; // Limpa a mensagem após o carregamento bem-sucedido
+                loginMessage.innerHTML = "";
             }
 
         } catch (error) {
@@ -368,39 +432,33 @@
         }
     }
 
-    // A função `parseTsv` agora lida com o formato TSV (tab-separated values).
     function parseTsv(text) {
         const lines = text.split('\n');
         return lines.map(line => {
-            // Divide a linha por tabulação, o delimitador para o formato TSV.
             const result = line.split('\t');
-            // Remove aspas extras e espaços em branco dos resultados.
             return result.map(item => (item || '').replace(/^"|"$/g, '').trim());
         });
     }
 
     function handleLogin(event) {
         event.preventDefault();
-        
+
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
-        
+
         console.log(`Tentativa de login com: Usuário=${username}, Senha=${password}`);
 
-        // Procura um usuário que corresponda às credenciais na lista de login.
-        const userFound = loginData.find(user => 
-            user.usuario && user.usuario.trim() === username.trim() && 
+        const userFound = loginData.find(user =>
+            user.usuario && user.usuario.trim() === username.trim() &&
             user.senha && user.senha.trim() === password.trim()
         );
-        
+
         console.log("Usuário encontrado:", userFound);
 
         if (userFound) {
-            // Se as credenciais estiverem corretas, mostra o conteúdo principal
             loginContainer.style.display = 'none';
             appContent.style.display = 'block';
-            
-            // Inicia o slider e seus botões
+
             slideInterval = setInterval(nextSlide, 5000);
             prevBtn.addEventListener('click', () => {
                 clearInterval(slideInterval);
@@ -413,63 +471,79 @@
                 slideInterval = setInterval(nextSlide, 5000);
             });
 
-            // Exibe TODOS os dados por padrão após o login bem-sucedido.
-            displayResults(allData);
-
+            handleFormSubmit();
         } else {
-            // Se as credenciais estiverem incorretas, exibe uma mensagem de erro
             loginMessage.innerHTML = "Usuário ou senha incorretos.";
         }
     }
 
     function handleFormSubmit(event) {
-        event.preventDefault();
-        
-        const form = event.target;
+        if (event) event.preventDefault();
+
+        const form = document.getElementById('searchForm');
         const formData = {
             numero: form.numero.value,
             ano: form.ano.value,
-            descricao: form.descricao.value
+            descricao: form.descricao.value,
+            tipo: form.tipo.value,
+            publicacao: form.publicação.value.toLowerCase().trim()
         };
         
-        // Remove os pontos do valor de busca para uma comparação mais flexível
         const sanitizedNumero = formData.numero.replace(/\./g, '');
-        
-        // Filtra os dados existentes na lista completa, sem refazer o fetch
-        let resultados = allData.filter(p => {
+        const sanitizedPublicacaoSearch = formData.publicacao.replace(/[\/\.\-]/g, '');
+
+        filteredResults = allData.filter(p => {
             const anoMatch = !formData.ano || p.ano.toString() === formData.ano;
-            
-            // Corrige a lógica de busca para o número da portaria, removendo os pontos
             const portariaSemPontos = (p.portaria || '').replace(/\./g, '');
             const numeroMatch = !sanitizedNumero || portariaSemPontos.startsWith(sanitizedNumero);
+            const descricaoMatch = !formData.descricao || (p.descricao && p.descricao.toLowerCase().includes(formData.descricao.toLowerCase()));
+            const tipoMatch = !formData.tipo || (p.tipo && p.tipo.toLowerCase().includes(formData.tipo.toLowerCase()));
             
-            const descricaoMatch = !formData.descricao || (p.descricao && p.descricao.toLowerCase().indexOf(formData.descricao.toLowerCase()) !== -1);
-            
-            return anoMatch && numeroMatch && descricaoMatch;
+            const sanitizedPublicacaoData = (p.publicação || '').toLowerCase().replace(/[\/\.\-]/g, '');
+            const publicacaoMatch = !formData.publicacao || (sanitizedPublicacaoData && sanitizedPublicacaoData.includes(sanitizedPublicacaoSearch));
+
+            return anoMatch && numeroMatch && descricaoMatch && tipoMatch && publicacaoMatch;
         });
 
-        resultados.sort((a, b) => {
+        filteredResults.sort((a, b) => {
             const aNum = parseFloat((a.portaria || '').replace(/\./g, ''));
             const bNum = parseFloat((b.portaria || '').replace(/\./g, ''));
-            return bNum - aNum;
+            return aNum - bNum;
         });
-
-        displayResults(resultados);
+        
+        currentPage = 1;
+        displayResults();
     }
 
-    function displayResults(resultados) {
+    function displayResults() {
         const resultsDiv = document.getElementById('results');
-        if (resultados.length === 0) {
+        const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
+        
+        resultsCountSpan.textContent = filteredResults.length;
+        pageInfoSpan.textContent = `Página ${currentPage} de ${totalPages || 1}`;
+
+        startIndexPageBtn.disabled = currentPage === 1 || filteredResults.length === 0;
+        prevPageBtn.disabled = currentPage === 1 || filteredResults.length === 0;
+        nextPageBtn.disabled = currentPage === totalPages || filteredResults.length === 0;
+        endIndexPageBtn.disabled = currentPage === totalPages || filteredResults.length === 0;
+
+        if (filteredResults.length === 0) {
             resultsDiv.innerHTML = "<p style='text-align:center;'>Nenhum resultado encontrado.</p>";
             return;
         }
 
-        let tableHtml = '<table><thead><tr><th>Portaria</th><th>Ano</th><th>Descrição</th><th>Link</th></tr></thead><tbody>';
-        
-        resultados.forEach(item => {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const portariasToDisplay = filteredResults.slice(startIndex, endIndex);
+
+        let tableHtml = '<table><thead><tr><th>Portaria</th><th>Ano</th><th>Tipo</th><th>Publicação</th><th>Descrição</th><th>Link</th></tr></thead><tbody>';
+
+        portariasToDisplay.forEach(item => {
             tableHtml += '<tr>';
             tableHtml += `<td>${item.portaria || ''}</td>`;
             tableHtml += `<td>${item.ano || ''}</td>`;
+            tableHtml += `<td>${item.tipo || ''}</td>`;
+            tableHtml += `<td>${item.publicação || ''}</td>`;
             tableHtml += `<td>${item.descricao || ''}</td>`;
             tableHtml += `<td><a href="${item.link || '#'}" class="acessar-btn" target="_blank">Acessar</a></td>`;
             tableHtml += '</tr>';
@@ -478,6 +552,71 @@
         tableHtml += '</tbody></table>';
         resultsDiv.innerHTML = tableHtml;
     }
+    
+    // Máscara de entrada para o campo de data
+    publicacaoInput.addEventListener('input', (e) => {
+        let value = e.target.value;
+        
+        // Remove tudo que não for dígito
+        let cleanedValue = value.replace(/\D/g, '');
+
+        let formattedValue = '';
+        if (cleanedValue.length > 0) {
+            formattedValue += cleanedValue.substring(0, 2);
+        }
+        if (cleanedValue.length >= 3) {
+            formattedValue += '-';
+            formattedValue += cleanedValue.substring(2, 4);
+        }
+        if (cleanedValue.length >= 5) {
+            formattedValue += '-';
+            formattedValue += cleanedValue.substring(4, 8);
+        }
+        
+        e.target.value = formattedValue;
+    });
+
+
+    // Event Listeners para a paginação
+    document.getElementById('searchForm').addEventListener('submit', handleFormSubmit);
+
+    itemsPerPageSelect.addEventListener("change", (e) => {
+        itemsPerPage = parseInt(e.target.value);
+        currentPage = 1;
+        displayResults();
+    });
+
+    startIndexPageBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage = 1;
+            displayResults();
+        }
+    });
+
+    prevPageBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            displayResults();
+        }
+    });
+
+    nextPageBtn.addEventListener("click", () => {
+        const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            displayResults();
+        }
+    });
+
+    endIndexPageBtn.addEventListener("click", () => {
+        const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
+        if (currentPage < totalPages) {
+            currentPage = totalPages;
+            displayResults();
+        }
+    });
+
+    loginForm.addEventListener('submit', handleLogin);
 </script>
 
 </body>
